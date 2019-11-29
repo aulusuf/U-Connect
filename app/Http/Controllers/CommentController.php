@@ -8,30 +8,43 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function makeComment(Request $request, $id){
-        
-        $post_id = Post::where('id', $id)->get();
-
-        // dd($request, $post_id);
+    public function store(Request $request, $id){
 
         $this->validate($request, [
             'comment' => 'required',
         ]);
 
-        // Comment::create([
-        //     'user_id' => $request->id,
-        //     'post_id' => $post_id,
-        //     'comment' => $request->comment
-        // ]);
-        $data = new Comment(); //comment() berasal dari validate
-        $data->user_id = $request->user_id; //$data->user_id ngisi di db, $request->user_id ambil dari field name
-        $data->post_id = $request->post_id;
-        $data->comment = $request->comment;
-        $data->save();
+        Comment::create([
+            'user_id' => $request->user_id,
+            'post_id' => $request->post_id,
+            'comment' => $request->comment
+        ]);
         return back();
     }
 
-    public function editComment(){
+    public function edit(Request $request, $id){
+
+        $comment_id = Comment::findOrFail($id);
+        
+
+
+    }
+
+    public function update(Request $request, $id){
+
+        $this->validate($request,[
+            'comment' => 'required',
+        ]);
+
+        $comment = Comment::where('id', $id)->update([
+            'comment' => $request->comment
+        ]);
+
+        return back();
+    }
+
+    public function delete($id){
+
 
     }
 }

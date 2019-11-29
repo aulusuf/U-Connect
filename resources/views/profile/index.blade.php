@@ -49,9 +49,9 @@
                 {{-- Jika belum menjadi teman --}}
                 @if ($user->id != Auth::user()->id) {{-- Jika user yang ditampilkan tidak sama dengan id login, tampilkan button --}}                
                     @if ($checkFollow==null)
-                        <a href="{{ route('follow_request', $user->id) }}" class="my-3 bg-blue-700 rounded-full px-8 py-2 text-sm text-white">Follow</a>
+                        <a href="{{ route('follow', $user->id) }}" class="my-3 bg-blue-700 rounded-full px-8 py-2 text-sm text-white">Follow</a>
                     @else
-                    <a href="{{ route('unfollow_request', $user->id) }}" class="my-3 bg-blue-700 rounded-full px-8 py-2 text-sm text-white">Unfollow</a>
+                    <a href="{{ route('unfollow', $user->id) }}" class="my-3 bg-blue-700 rounded-full px-8 py-2 text-sm text-white">Unfollow</a>
                     @endif
                 @endif
                         
@@ -63,14 +63,14 @@
     
     <div class="px-6 py-4">
 
-                @include('layouts.new-post') 
+                @include('post.new-post') 
             
             
             
             <div class="text-center my-4">
                 <p class="timeline-label">Wall</p>
             </div>
-            @include('profile.post')
+            @include('post.post')
         </div>
         {{-- </div> --}}
 

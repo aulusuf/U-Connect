@@ -20,13 +20,13 @@ class ProfileController extends PostController
     public function index($id){
         $login      = Auth::user()->id;
         $user       = User::where('id', $id)->first();
+        
+        $posts      = Post::with(['post_from_user', 'comment_to_post','comment_to_post.comment_from_user'])->where('user_id',$id)->orderBy('created_at','desc')->get();
         $comment    = Comment::where('id',$id)->get();
-
-        // main section
-        // membuat post dar field form
-        // melihat postingan dari $id yang dilihat
-        // melihat perbedaan waktu postingan
-        $posts = Post::with(['post_from_user', 'comment_to_post','comment_to_post.comment_from_user'])->where('user_id',$id)->orderBy('created_at','desc')->get();
+        
+        
+        $followers  = Friendship::with('requester_to_user')->where('user_requested',$id)->get();
+        $followings = Friendship::with('user_requested_to_user')->where('requester', $id)->get();
 
         $simpantglpost = array();
         $postsjumlah = count($posts);
@@ -37,8 +37,7 @@ class ProfileController extends PostController
             $checkFollow = null;
         }
         
-        /*followers*/    $followers = Friendship::with('requester_to_user')->where('user_requested',$id)->get();
-        /*followings*/    $followings = Friendship::with('user_requested_to_user')->where('requester', $id)->get();
+
         
 
         if($postsjumlah == 0){
@@ -65,15 +64,6 @@ class ProfileController extends PostController
         $simpanbeda = $this->perbedaan_timeset($perbedaan);
         }
            
-
-
-
-        // right section
-        // cek status auth user
-        // jika klik melihat user adalah user yang login, maka menampilkan profile.index $auth
-        // jika klik melihat user adalah user lain, maka menampilkan profile.index $user
-        // dd($followings);
-                
     
         return view('profile.index', compact('login','user','posts','followers','followings','simpanbeda','checkFollow' ) );
     }
@@ -116,7 +106,7 @@ class ProfileController extends PostController
             return response()->json([
                 'success' => true,
                 'data' => [
-                    'image' => asset($path . '/' . $filename)
+                'image' => asset($path . '/' . $filename)
                 ]
             ]);
         } catch (\Exception $e) {

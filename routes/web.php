@@ -28,25 +28,21 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/profile/{id}', 'ProfileController@index')->name('profile');
     
-    Route::post('/changepic', 'ProfileController@changePic')->name('changePic');
-    Route::post('/changecov', 'ProfileController@changeCov')->name('changeCov');
+    Route::post('/picture', 'ProfileController@changePic')->name('changePic');
+    Route::post('/cover', 'ProfileController@changeCov')->name('changeCov');
 
-    Route::post('/post', 'PostController@makePost')->name('makePost');
+    Route::post('/new-post', 'PostController@store')->name('store.post');
+    Route::get('/edit-post', 'PostController@edit')->name('edit.post');
+    Route::post('/delete-post', 'PostController@delete')->name('delete.post');
+
+    Route::post('/{id}/new-comment','CommentController@store')->name('store.comment');
+    Route::post('/{id}/edit-comment','CommentController@edit')->name('edit.comment');
+    Route::post('/{id}/update-comment','CommentController@update')->name('update.comment');
+    Route::post('/{id}/delete-comment','CommentController@delete')->name('delete.comment');
 
     Route::get('/searchFriend','FriendshipController@searchFriend')->name('searchFriend');
-    // Route::get('/addFriend/{id}','FriendshipController@sendReqFriend')->name('addFriend');
-    Route::get('/request','FriendshipController@request_waiting')->name('reqWaiting');
-    Route::get('/accept/{id}','FriendshipController@acceptFriend')->name('acceptFriend');
 
-    Route::get('/follow/{id}','FriendshipController@follow')->name('follow_request');
-    Route::get('/unfollow/{id}','FriendshipController@unfollow')->name('unfollow_request');
-
-    Route::post('/{id}/comment','CommentController@makeComment')->name('makeComment');
-
-    // new route
-    // Route::get('/{id}', 'ProfileController@index')->name('profile');
-    // Route::get('/{requested_id}/add', 'ProfileController@add')->name('addFriend');
-    // Route::get('/{friendship_id}/cancel', 'ProfileController@cancel')->name('cancelAddFriend');
-
+    Route::get('/{id}/follow','FriendshipController@follow')->name('follow');
+    Route::get('/{id}/unfollow','FriendshipController@unfollow')->name('unfollow');
 
 });

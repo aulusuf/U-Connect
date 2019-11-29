@@ -10,10 +10,11 @@ class Comment extends Model
     protected $table    ="comments";
     protected $primaryKey  = "id";
     public $timestamps = true;
+    // protected $guarded = ['id'];
 
-    // protected $fillable = [
-    //     'user_id','post_id', 'comment',
-    // ];
+    protected $fillable = [
+        'user_id','post_id', 'comment',
+    ];
 
 
     public function comment_from_user(){ //bisa disimpelkan dengan target tabel

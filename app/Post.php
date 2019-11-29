@@ -8,7 +8,7 @@ class Post extends Model
 {
 
     protected $table    ="posts";
-    protected $primaryKey  = 'id';
+    // protected $primaryKey  = 'id';
     protected $guarded = ['id'];
 
     public function post_from_user(){
