@@ -32,13 +32,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/cover', 'ProfileController@changeCov')->name('changeCov');
 
     Route::post('/new-post', 'PostController@store')->name('store.post');
-    Route::get('/edit-post', 'PostController@edit')->name('edit.post');
+    Route::get('/update-post', 'PostController@update')->name('update.post');
     Route::post('/delete-post', 'PostController@delete')->name('delete.post');
 
     Route::post('/{id}/new-comment','CommentController@store')->name('store.comment');
     Route::post('/{id}/edit-comment','CommentController@edit')->name('edit.comment');
     Route::post('/{id}/update-comment','CommentController@update')->name('update.comment');
-    Route::post('/{id}/delete-comment','CommentController@delete')->name('delete.comment');
+    Route::delete('/delete-comment/{id}','CommentController@delete')->name('delete.comment');
 
     Route::get('/searchFriend','FriendshipController@searchFriend')->name('searchFriend');
 

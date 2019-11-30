@@ -33,6 +33,9 @@
             <i class="far fa-comment text-xl"></i>
         </button>
     </div>
+    <div class="">
+
+    </div>
 
     @include('layouts.comment' , ['comments' => $post->comment_to_post])
     {{-- ['comments' => $posts->comments, 'post_id' => $posts->id] --}}

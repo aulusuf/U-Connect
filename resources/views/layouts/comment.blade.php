@@ -3,9 +3,6 @@
     // dump($comments);    
 @endphp
 
-
-
-
 @foreach ($comments as $comment)
 <div class="status-comment-section flex my-2">
         <img  name="user_profile" src="{{ asset('zondicons') }}/{{ $comment->comment_from_user->pic }}" class="rounded-full w-5 h-5 mr-2">

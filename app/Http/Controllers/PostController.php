@@ -28,6 +28,13 @@ class PostController extends Controller
         
 
     }
+    public function update($id){
+        
+        $post = Post::find($id);
+
+        
+
+    }
 
     public function makeComment(Request $request){
         Comment::create([

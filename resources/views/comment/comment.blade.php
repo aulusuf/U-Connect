@@ -7,15 +7,18 @@
             <a name="user_comment" href="" class="font-bold text-xs">{{$comment->comment_from_user->name}}</a>
             <div class="text-xs flex">
                 <div class="px-2">
-                    <a href="{{ route('edit.post', $comment->id) }}" class="text-blue-100 hover:text-blue-400" id="edit-comment">Edit</a>                      
+                    <a href="{{ route('edit.comment', $comment->id) }}" class="text-blue-100 hover:text-blue-400" id="edit-comment">Edit</a>                      
                 </div>
                 <div class="px-2">
-                    <a href="{{ route('delete.post', $comment->id) }}" class="text-red-100 hover:text-red-400">Delete</a>
+                    @method('DELETE')
+                    <a href="{{ route('delete.comment', $comment->id) }}" class="text-red-100 hover:text-red-400">Delete</a>
                 </div>
             </div>
         </div>
 
         <p name="comment" class="status-comment text-sm bg-gray-100 px-2 pb-1 rounded-lg mt-1">{{$comment->comment}}</p>
+
+        {{-- Jquery --}}
         <form action="{{ route('update.comment',$comment->id) }}" method="post">
                 @csrf
                 <div class="flex my-2 mb-4">

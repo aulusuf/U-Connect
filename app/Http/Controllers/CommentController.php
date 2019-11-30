@@ -24,10 +24,8 @@ class CommentController extends Controller
 
     public function edit(Request $request, $id){
 
-        $comment_id = Comment::findOrFail($id);
+        $comment = Comment::findOrFail($id);
         
-
-
     }
 
     public function update(Request $request, $id){
@@ -45,6 +43,11 @@ class CommentController extends Controller
 
     public function delete($id){
 
+        $comment = Comment::find($id);
+
+        $comment->delete();
+
+        return redirect()->back();
 
     }
 }
